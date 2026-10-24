@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Cloudflare Site</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background: #f6821f;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My First Cloudflare Site</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f6821f;
+      color: white;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Hello from Cloudflare! 🚀</h1>
-    <p>Made by Ayesha</p>
-    <p>Learning Cloudflare step by step 💻</p>
-</body>
+  <h1>Hello from Cloudflare! 🚀</h1>
+  <p>Made by Ayesha</p>
+  <p>Learning Cloudflare step by step 💻</p>
 
+  <!-- 👇 NAYA: yahan visitor count dikhega -->
+  <p id="visits">Loading visitors... ⏳</p>
+
+  <!-- 👇 NAYA: Worker API se data laane wala code -->
+  <script>
+    fetch("https://my-first-worker.ayesha-190.workers.dev/api/visits")
+      .then((res) => res.json())
+      .then((data) => {
+        document.getElementById("visits").textContent =
+          `👀 You are visitor number ${data.visits}`;
+      })
+      .catch(() => {
+        document.getElementById("visits").textContent = "Couldn't load visitors 😕";
+      });
+  </script>
+</body>
 </html>
